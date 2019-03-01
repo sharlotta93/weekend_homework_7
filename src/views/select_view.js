@@ -5,9 +5,8 @@ const SelectView = function (selectElement) {
 };
 
 SelectView.prototype.bindEvents = function () {
-  PubSub.subscribe('Movies:data-ready', (evt) => {
+  PubSub.subscribe('Directors:data-ready', (evt) => {
     this.populateSelect(evt.detail);
-    console.log(evt.detail);
   });
 
   this.selectElement.addEventListener('change', (evt) => {
@@ -16,11 +15,11 @@ SelectView.prototype.bindEvents = function () {
   });
 };
 
-SelectView.prototype.populateSelect = function (movieDirectors) {
-  movieDirectors.forEach((director, index) => {
-    const option = this.createDirectorOption(director, index);
-    this.selectElement.appendChild(option);
-  })
+SelectView.prototype.populateSelect = function (movies) {
+  movies.forEach((movie, index) => {
+      const option = this.createDirectorOption(movie.director, index);
+      this.selectElement.appendChild(option);
+ })
 };
 
 SelectView.prototype.createDirectorOption = function (director, index) {
