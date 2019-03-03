@@ -21,7 +21,6 @@ Display.prototype.render = function () {
 
 Display.prototype.getName = function () {
   const name = document.createElement('h2');
-  // name.classList.add('movie-name');
   if (!this.movie.title) {
     name.textContent = "Misc";
   } else {

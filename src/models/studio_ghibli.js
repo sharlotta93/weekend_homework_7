@@ -3,6 +3,7 @@ let movies = [];
 
 const StudioGhibli = function () {
   this.movies = []
+  this.directors = []
 }
 
 StudioGhibli.prototype.getData = function () {
@@ -17,7 +18,8 @@ StudioGhibli.prototype.getData = function () {
 };
 
 StudioGhibli.prototype.getDirectors = function (data) {
-  var directors = [];
+return new Promise( (resolve, reject) => {
+  let directors = this.directors;
   const movies = data;
   movies.forEach((movie) => {
     for(let i = 0;i < movies.length; i++){
@@ -27,7 +29,27 @@ StudioGhibli.prototype.getDirectors = function (data) {
       };
   });
     PubSub.publish('Directors:data-ready', directors);
+    resolve(data)
+ });
 };
 
+StudioGhibli.prototype.bindEvents = function (data) {
+  PubSub.subscribe('SelectView:change', (evt) => {
+    this.getMoviesByDirector(evt.detail, data);
+  })
+};
+
+StudioGhibli.prototype.getMoviesByDirector = function (directorIndex, data) {
+  const chosenDirector = this.directors[directorIndex];
+  const finalMovies = data.filter((movie) => {
+  return movie.director === chosenDirector;
+  });
+  PubSub.publish('Movies:data-ready', finalMovies);
+};
+
+StudioGhibli.prototype.publishMoviesByDirector = function (directorIndex) {
+  const foundMovie = this.getMoviesByDirector(directorIndex);
+  PubSub.publish('Movies:data-ready', foundMovie);
+};
 
 module.exports = StudioGhibli;

@@ -13,6 +13,7 @@ MoviesView.prototype.bindEvents = function () {
 };
 
 MoviesView.prototype.render = function () {
+  this.container.innerHTML = '';
   this.movies.forEach((movie) => {
   const movieView = new Display(this.container, movie);
   movieView.render();
