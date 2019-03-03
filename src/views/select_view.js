@@ -15,9 +15,9 @@ SelectView.prototype.bindEvents = function () {
   });
 };
 
-SelectView.prototype.populateSelect = function (movies) {
-  movies.forEach((movie, index) => {
-      const option = this.createDirectorOption(movie.director, index);
+SelectView.prototype.populateSelect = function (directors) {
+  directors.forEach((director, index) => {
+      const option = this.createDirectorOption(director, index);
       this.selectElement.appendChild(option);
  })
 };

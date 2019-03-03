@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const movies = new StudioGhibli();
   //movies.bindEvents();
-  movies.getData();
-  setTimeout(function(){ movies.getDirectors(); }, 3000);
-
+  movies.getData()
+        .then(data => movies.getDirectors(data));
 });
