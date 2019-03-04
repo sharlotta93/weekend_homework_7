@@ -47,9 +47,5 @@ StudioGhibli.prototype.getMoviesByDirector = function (directorIndex, data) {
   PubSub.publish('Movies:data-ready', finalMovies);
 };
 
-StudioGhibli.prototype.publishMoviesByDirector = function (directorIndex) {
-  const foundMovie = this.getMoviesByDirector(directorIndex);
-  PubSub.publish('Movies:data-ready', foundMovie);
-};
 
 module.exports = StudioGhibli;
